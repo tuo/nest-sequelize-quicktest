@@ -14,3 +14,9 @@ npm install --save-dev @types/sequelize
 
 ht POST localhost:3000/auth/login username=Tuo pass=111222
 ht localhost:3000/profile
+
+###### add roles for admin/staff
+
+###### add public for exclusion
+
+https://docs.nestjs.com/guards
