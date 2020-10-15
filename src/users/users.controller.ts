@@ -17,6 +17,10 @@ export class UsersController {
     console.log('configService: ', this.configService);
     console.log('DB_NAME: ', this.configService.get<string>('DB_NAME'));
     console.log('HOST: ', this.configService.get<string>('database.host'));
+    console.log(
+      'days to keep: ',
+      this.configService.get<string>('days_to_keep'),
+    );
     return this.usersService.findAll();
   }
 

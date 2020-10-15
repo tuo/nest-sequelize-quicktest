@@ -3,20 +3,21 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
     SequelizeModule.forRootAsync({
-      useFactory: () => ({
+      inject: [ConfigService],
+      useFactory: (configureService: ConfigService) => ({
         dialect: 'postgres',
-        host: 'localhost',
-        port: 5432,
-        username: 'postgres',
-        password: '123456',
-        database: 'nest_blog_api',
+        host: configureService.get('DB_HOST'),
+        port: configureService.get('DB_PORT'),
+        username: configureService.get('DB_USER'),
+        password: configureService.get('DB_PASS'),
+        database: configureService.get('DB_NAME'),
         autoLoadModels: true,
         synchronize: false,
       }),

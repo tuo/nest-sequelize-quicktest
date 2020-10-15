@@ -4,4 +4,6 @@ export default () => ({
     host: process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT, 10) || 5432,
   },
+  //SOME EXTRA PLAIN COMMON Non-credentail config
+  days_to_keep: 30,
 });
