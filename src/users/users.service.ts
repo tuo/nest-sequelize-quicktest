@@ -26,4 +26,8 @@ export class UsersService {
     user.lastName = createUserDto.lastName;
     return user.save();
   }
+
+  findOneByName(username: string): Promise<User> {
+    return this.userModel.findOne({ where: { firstName: username } });
+  }
 }
