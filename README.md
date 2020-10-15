@@ -20,3 +20,7 @@ ht localhost:3000/profile
 ###### add public for exclusion
 
 https://docs.nestjs.com/guards
+
+## PROBLEMS:
+
+- seuqlize typescript couldn't support autocompletion on create/update/where: https://github.com/RobinBuschmann/sequelize-typescript/issues/726
