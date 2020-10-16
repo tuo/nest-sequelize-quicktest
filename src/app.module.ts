@@ -25,6 +25,7 @@ import { APP_GUARD } from '@nestjs/core';
         synchronize: false,
       }),
     }),
+
     UsersModule,
     AuthModule,
   ],

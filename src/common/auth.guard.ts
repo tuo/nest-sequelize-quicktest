@@ -1,17 +1,35 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private reflector: Reflector,
+  ) {}
 
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const req = context.switchToHttp().getRequest();
     // return validateRequest(req);
-    console.log('auth guard request: ', this.jwtService);
+
+    const isPublic = this.reflector.get<boolean>(
+      'isPublic',
+      context.getHandler(),
+    );
+    console.log(
+      'auth guard request: ',
+      this.jwtService,
+      'isPublic, ',
+      isPublic,
+    );
+    if (isPublic) {
+      return true;
+    }
+
     if (
       req.headers.authorization &&
       req.headers.authorization.split(' ')[0] === 'Bearer'

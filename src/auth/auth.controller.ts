@@ -8,6 +8,7 @@ import {
   Request,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Public } from 'src/common/decorators';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -18,6 +19,7 @@ export class AuthController {
   ) {}
 
   @Post('login')
+  @Public()
   async login(@Request() req, @Body() body) {
     console.log('body', body);
     console.log('req.user', req.user);
