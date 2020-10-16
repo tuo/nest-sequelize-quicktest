@@ -2,22 +2,25 @@ import { User } from './user.model';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateUserDto } from './create-user.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User) private userModel: typeof User) {}
+  constructor(
+    @InjectRepository(User) private usersRepository: Repository<User>,
+  ) {}
 
   async findAll(): Promise<User[]> {
-    return this.userModel.findAll();
+    return this.usersRepository.find();
   }
 
   findOne(id: string): Promise<User> {
-    return this.userModel.findOne({ where: { id } });
+    return this.usersRepository.findOne({ where: { id } });
   }
 
   async remove(id: string): Promise<void> {
-    const user = await this.findOne(id);
-    await user.destroy();
+    await this.usersRepository.delete(id);
   }
 
   create(createUserDto: CreateUserDto): Promise<User> {
@@ -25,10 +28,10 @@ export class UsersService {
     user.firstName = createUserDto.firstName;
     user.lastName = createUserDto.lastName;
     user.isActive = true;
-    return user.save();
+    return this.usersRepository.save(user);
   }
 
   findOneByName(username: string): Promise<User> {
-    return this.userModel.findOne({ where: { firstName: username } });
+    return this.usersRepository.findOne({ where: { firstName: username } });
   }
 }
