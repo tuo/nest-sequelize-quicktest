@@ -10,10 +10,10 @@ npm install --save-dev @types/sequelize
 - error handling
 - cron jobs
 
-// ht localhost:3000/profile Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyNzU5NTExLCJleHAiOjE2MDI4NDU5MTF9.iV9og49A-qt03Sy*n13p_Y4bkZHkruEPlNm*-sEyG1g"
+httpie localhost:3000/profile Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyNzU5NTExLCJleHAiOjE2MDI4NDU5MTF9.iV9og49A-qt03Sy*n13p_Y4bkZHkruEPlNm*-sEyG1g"
 
-ht POST localhost:3000/auth/login username=Tuo pass=111222
-ht localhost:3000/profile
+httpie POST localhost:3000/auth/login username=Tuo pass=111222
+httpie localhost:3000/profile
 
 ###### add roles for admin/staff
 
@@ -24,3 +24,4 @@ https://docs.nestjs.com/guards
 ## PROBLEMS:
 
 - seuqlize typescript couldn't support autocompletion on create/update/where: https://github.com/RobinBuschmann/sequelize-typescript/issues/726
+- [nest g resource](https://trilon.io/blog/introducing-cli-generators-crud-api-in-1-minute) - will not include orm part - need create a yeoman like cli to generate Sequelize-relation scaffoldings.
